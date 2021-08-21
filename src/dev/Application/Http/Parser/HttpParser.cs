@@ -22,11 +22,6 @@ namespace Networks.Application.Http
         public static HttpParser Instance => lazy.Value;
 
         /// <summary>
-        /// The symbol type of this node
-        /// </summary>
-        public HttpParserType ParserType => HttpParserType.StartLine;
-
-        /// <summary>
         /// Beign parsing from start line
         /// </summary>
         public IHttpParser Start => StartLineParser.Instance;
