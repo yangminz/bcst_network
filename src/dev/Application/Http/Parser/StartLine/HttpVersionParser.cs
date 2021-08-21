@@ -49,7 +49,8 @@ namespace Networks.Application.Http
         /// <returns>The parser after accepting this character</returns>
         public IHttpParser StreamParse(char input)
         {
-            if (input == 'T' || input == 't' ||
+            if (input == 'H' || input == 'h' ||
+                input == 'T' || input == 't' ||
                 input == 'P' || input == 'p' ||
                 input == '/' || input == '1' || input == '.')
             {

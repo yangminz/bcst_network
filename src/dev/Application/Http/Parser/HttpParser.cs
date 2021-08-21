@@ -12,37 +12,36 @@ using System;
 namespace Networks.Application.Http
 {
     /// <summary>
-    /// The url parser
+    /// The http parser
     /// </summary>
-    public sealed class FieldKeyParser : IHttpParser
+    public sealed class HttpParser
     {
         /// <summary>
         /// The static singleton instance
         /// </summary>
-        public static FieldKeyParser Instance => lazy.Value;
+        public static HttpParser Instance => lazy.Value;
 
         /// <summary>
         /// The symbol type of this node
         /// </summary>
-        public HttpParserType ParserType => HttpParserType.FieldKey;
+        public HttpParserType ParserType => HttpParserType.StartLine;
+
+        /// <summary>
+        /// Beign parsing from start line
+        /// </summary>
+        public IHttpParser Start => StartLineParser.Instance;
 
         /// <summary>
         /// Use System.Lazy is thread safe and lazy for the singleton
         /// </summary>
-        private static readonly Lazy<FieldKeyParser> lazy = new Lazy<FieldKeyParser>(
-            () => new FieldKeyParser());
+        private static readonly Lazy<HttpParser> lazy = new Lazy<HttpParser>(
+            () => new HttpParser());
 
         /// <summary>
         /// private constructor
         /// </summary>
-        private FieldKeyParser()
+        private HttpParser()
         {
-        }
-
-        /// <inheritdoc />
-        public IHttpParser StreamParse(char input)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -50,7 +50,10 @@ namespace Networks.Application.Http
                 ('A' <= input && input <= 'Z') ||
                 ('0' <= input && input <= '9') ||
                 input == ':' || input == '/' || input == '.' ||
-                input == '?' || input == '%' || input == '*')
+                input == '?' || input == '%' || input == '*' ||
+                input == '=' || input == '&' || input == '~' ||
+                input == '(' || input == ')' || input == '\"' ||
+                input == '<' || input == '>' || input == '-')
             {
                 return UrlParser.Instance;
             }
