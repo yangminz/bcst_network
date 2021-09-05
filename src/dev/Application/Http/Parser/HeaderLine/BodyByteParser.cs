@@ -14,47 +14,39 @@ namespace Networks.Application.Http
     /// <summary>
     /// The url parser
     /// </summary>
-    public sealed class FieldKeyParser : IHttpParser
+    public sealed class BodyByteParser : IHttpParser
     {
         /// <summary>
         /// The static singleton instance
         /// </summary>
-        public static FieldKeyParser Instance => lazy.Value;
+        public static BodyByteParser Instance => lazy.Value;
 
         /// <summary>
         /// The symbol type of this node
         /// </summary>
-        public HttpParserType ParserType => HttpParserType.FieldKey;
+        public HttpParserType ParserType => HttpParserType.Body;
 
         /// <summary>
         /// Use System.Lazy is thread safe and lazy for the singleton
         /// </summary>
-        private static readonly Lazy<FieldKeyParser> lazy = new Lazy<FieldKeyParser>(
-            () => new FieldKeyParser());
+        private static readonly Lazy<BodyByteParser> lazy = new Lazy<BodyByteParser>(
+            () => new BodyByteParser());
 
         /// <summary>
         /// private constructor
         /// </summary>
-        private FieldKeyParser()
+        private BodyByteParser()
         {
         }
 
         /// <inheritdoc />
         public IHttpParser StreamParse(char input)
         {
-            if (input == '-' ||
-                ('a' <= input && input <= 'z') ||
-                ('A' <= input && input <= 'Z'))
-            {
-                return FieldKeyParser.Instance;
-            }
-            else if (input == ':')
-            {
-                // end of processing one field key
-                return FieldValueParser.Instance;
-            }
-
-            throw new HttpParsingException("Illegal char for header key <" + input + ">");
+            // This body byte parser works as terminator of
+            // the parsing of start line and header lines
+            // When the type is found to be Body,
+            // the caller should stop character parsing
+            return BodyByteParser.Instance;
         }
     }
 }

@@ -26,5 +26,6 @@ namespace Networks.Application.Http
         HeaderLine,
         FieldKey,
         FieldValue,
+        Body,
     }
 }

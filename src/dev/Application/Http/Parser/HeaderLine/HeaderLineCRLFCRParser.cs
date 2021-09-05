@@ -14,47 +14,41 @@ namespace Networks.Application.Http
     /// <summary>
     /// The url parser
     /// </summary>
-    public sealed class FieldKeyParser : IHttpParser
+    public sealed class HeaderLineCRLFCRParser : IHttpParser
     {
         /// <summary>
         /// The static singleton instance
         /// </summary>
-        public static FieldKeyParser Instance => lazy.Value;
+        public static HeaderLineCRLFCRParser Instance => lazy.Value;
 
         /// <summary>
         /// The symbol type of this node
         /// </summary>
-        public HttpParserType ParserType => HttpParserType.FieldKey;
+        public HttpParserType ParserType => HttpParserType.HeaderLine;
 
         /// <summary>
         /// Use System.Lazy is thread safe and lazy for the singleton
         /// </summary>
-        private static readonly Lazy<FieldKeyParser> lazy = new Lazy<FieldKeyParser>(
-            () => new FieldKeyParser());
+        private static readonly Lazy<HeaderLineCRLFCRParser> lazy = new Lazy<HeaderLineCRLFCRParser>(
+            () => new HeaderLineCRLFCRParser());
 
         /// <summary>
         /// private constructor
         /// </summary>
-        private FieldKeyParser()
+        private HeaderLineCRLFCRParser()
         {
         }
 
         /// <inheritdoc />
         public IHttpParser StreamParse(char input)
         {
-            if (input == '-' ||
-                ('a' <= input && input <= 'z') ||
-                ('A' <= input && input <= 'Z'))
+            if (input == '\n')
             {
-                return FieldKeyParser.Instance;
-            }
-            else if (input == ':')
-            {
-                // end of processing one field key
-                return FieldValueParser.Instance;
+                // end of processing headers
+                return BodyByteParser.Instance;
             }
 
-            throw new HttpParsingException("Illegal char for header key <" + input + ">");
+            throw new HttpParsingException("Header lines: should get <CR>_<LF>_ as end of all headers but get <" + input + ">");
         }
     }
 }
