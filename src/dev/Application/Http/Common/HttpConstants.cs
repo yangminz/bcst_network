@@ -68,6 +68,11 @@ namespace Networks.Application.Http
         public const string KeepAlive = "Keep-Alive";
 
         /// <summary>
+        /// The max of content length
+        /// </summary>
+        public const int MaxContentLength = 4 * 1024;
+
+        /// <summary>
         /// Mapping from HttpStatusCodeType to its string
         /// </summary>
         public static readonly Dictionary<HttpStatusCodeType, string> HttpCodeMap = new Dictionary<HttpStatusCodeType, string>()

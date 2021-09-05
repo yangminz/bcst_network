@@ -14,12 +14,12 @@ namespace Networks.Application.Http
     /// <summary>
     /// The url parser
     /// </summary>
-    public sealed class BodyByteParser : IHttpParser
+    public sealed class BodyEmptyParser : IHttpParser
     {
         /// <summary>
         /// The static singleton instance
         /// </summary>
-        public static BodyByteParser Instance => lazy.Value;
+        public static BodyEmptyParser Instance => lazy.Value;
 
         /// <summary>
         /// The symbol type of this node
@@ -29,13 +29,13 @@ namespace Networks.Application.Http
         /// <summary>
         /// Use System.Lazy is thread safe and lazy for the singleton
         /// </summary>
-        private static readonly Lazy<BodyByteParser> lazy = new Lazy<BodyByteParser>(
-            () => new BodyByteParser());
+        private static readonly Lazy<BodyEmptyParser> lazy = new Lazy<BodyEmptyParser>(
+            () => new BodyEmptyParser());
 
         /// <summary>
         /// private constructor
         /// </summary>
-        private BodyByteParser()
+        private BodyEmptyParser()
         {
         }
 
@@ -46,7 +46,7 @@ namespace Networks.Application.Http
             // the parsing of start line and header lines
             // When the type is found to be Body,
             // the caller should stop character parsing
-            return BodyByteParser.Instance;
+            return BodyEmptyParser.Instance;
         }
     }
 }

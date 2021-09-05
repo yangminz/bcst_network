@@ -45,7 +45,7 @@ namespace Networks.Application.Http
             if (input == '\n')
             {
                 // end of processing headers
-                return BodyByteParser.Instance;
+                return BodyEmptyParser.Instance;
             }
 
             throw new HttpParsingException("Header lines: should get <CR>_<LF>_ as end of all headers but get <" + input + ">");

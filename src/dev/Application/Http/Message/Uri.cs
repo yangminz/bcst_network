@@ -44,5 +44,13 @@ namespace Networks.Application.Http
         /// is having scheme https
         /// </summary>
         public string Scheme;
+
+        /// <summary>
+        /// constructor for string url input
+        /// </summary>
+        /// <param name="urlString">url string</param>
+        public Uri(string urlString)
+        {
+        }
     }
 }
